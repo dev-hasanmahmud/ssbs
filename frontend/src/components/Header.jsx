@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -13,6 +14,7 @@ export default function Header() {
     if (token && user) {
       setIsLoggedIn(true);
       setUserName(user.name);
+      setIsAdmin(user.is_admin === 1);
     }
   }, []);
 
@@ -32,6 +34,7 @@ export default function Header() {
           <li className="nav-item">
             <Link className="nav-link text-dark" to="/">Home</Link>
           </li>
+          {isLoggedIn && isAdmin && (
           <li className="nav-item dropdown">
             <a
               className="nav-link text-dark dropdown-toggle"
@@ -50,6 +53,7 @@ export default function Header() {
               </li>
             </ul>
           </li>
+          )}
         </ul>
 
         <ul className="navbar-nav ms-auto">

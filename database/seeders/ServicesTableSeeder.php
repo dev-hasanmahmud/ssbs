@@ -11,8 +11,8 @@ class ServicesTableSeeder extends Seeder
     {
         $services = [
             [
-                'name'              => 'Business Website development',
-                'description'       => 'Business Website description',
+                'name'              => 'Website development',
+                'description'       => 'Website description',
                 'price'             => '3000',
                 'status'            => 1,
             ],
