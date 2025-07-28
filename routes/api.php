@@ -12,12 +12,14 @@ use App\Http\Controllers\API\V1\Admin\AdminBookingController;
 // Public Routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::get('/services', [ServiceController::class, 'index']);
 
 // Customer Routes
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/services', [ServiceController::class, 'index']);
-    Route::post('/bookings', [BookingController::class, 'store']);
+    Route::get('/profile', [AuthController::class, 'profile']);
+    Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/bookings', [BookingController::class, 'index']);
+    Route::post('/bookings', [BookingController::class, 'store']);
 
     // Routes for Admin only
     Route::middleware('admin')->group(function () {

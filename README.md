@@ -1,8 +1,8 @@
 ## SSBS
 
-A simple API-based **Simple Service Booking System** built with Laravel 12 using Sanctum for authentication.
+A simple API-based **Simple Service Booking System** built with Laravel 12 using Sanctum for authentication and React 19 for UI development.
 
-## 📦 Features
+## Features
 
 - User Registration & Login (Token-based)
 - Role-based access (Admin vs Customer)
@@ -15,21 +15,26 @@ A simple API-based **Simple Service Booking System** built with Laravel 12 using
 
 ---
 
-## ⚙️ Tech Stack
+## Tech Stack
 
 - Laravel 12
 - Sanctum (API Auth)
 - MySQL
 - Postman (for testing)
+- React 19
+- Bootstrap
+- Axios
 
 ---
 
-## 🚀 Setup Instructions
+## Setup Instructions
 
 ### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/dev-hasanmahmud/ssbs.git
+
+For backend check:
 cd ssbs
 composer install
 cp .env.example .env
@@ -42,6 +47,13 @@ cp .env.example .env
 php artisan key:generate
 php artisan migrate --seed
 php artisan serve
+http://localhost:8000/
+
+For frontend check:
+cd ssbs/frontend
+npm install
+npm run dev
+http://localhost:5173/
 ```
 ### 2. Login
 	- Email: admin@test.com   Password: password
@@ -52,6 +64,8 @@ php artisan serve
 API Endpoints	                   					   Method	Access
 - http://localhost:8000/api/register					POST	Public
 - http://localhost:8000/api/login						POST	Public
+- http://localhost:8000/api/profile						GET		Customer
+- http://localhost:8000/api/logout						POST	Customer
 - http://localhost:8000/api/services					GET		Customer
 - http://localhost:8000/api/bookings					POST	Customer
 - http://localhost:8000/api/bookings					GET		Customer
