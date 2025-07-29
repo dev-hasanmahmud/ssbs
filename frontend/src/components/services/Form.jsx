@@ -8,7 +8,7 @@ export default function ServiceForm() {
     name: '',
     price: '',
     description: '',
-    status: '',
+    status: 'active',
   });
 
   const [loading, setLoading] = useState(true);
@@ -26,7 +26,7 @@ export default function ServiceForm() {
             name: data.name ?? '',
             price: data.price != null ? String(data.price) : '',
             description: data.description ?? '',
-            status: data.status ?? '',
+            status: data.status ?? 'active',
           });
         })
         .catch((err) => {
@@ -38,7 +38,7 @@ export default function ServiceForm() {
     } else {
       setLoading(false);
     }
-  }, [id]);
+  }, [id, isEdit, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -49,10 +49,25 @@ export default function ServiceForm() {
     e.preventDefault();
 
     try {
+      const formData = new FormData();
+
+      Object.entries(form).forEach(([key, value]) => {
+        formData.append(key, value);
+      });
+
       if (isEdit) {
-        await API.put(endpoints.updateService(id), form);
+        formData.append('_method', 'PUT');
+        await API.post(endpoints.updateService(id), formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
       } else {
-        await API.post(endpoints.createService, form);
+        await API.post(endpoints.createService, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
       }
 
       navigate('/service-list');
