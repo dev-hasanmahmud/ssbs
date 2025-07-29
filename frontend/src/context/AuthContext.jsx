@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import endpoints from '../api/endpoints';
 
 const AuthContext = createContext();
 
@@ -24,10 +25,27 @@ export const AuthProvider = ({ children }) => {
     setUser(userData);
   };
 
-  const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('auth_user');
-    setUser(null);
+  const logout = async () => {
+    try {
+      const token = localStorage.getItem('token');
+
+      await fetch(endpoints.logout, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      localStorage.removeItem('token');
+      localStorage.removeItem('auth_user');
+      setUser(null);
+    } catch (error) {
+      console.error('Logout failed:', error);
+      localStorage.removeItem('token');
+      localStorage.removeItem('auth_user');
+      setUser(null);
+    }
   };
 
   return (
