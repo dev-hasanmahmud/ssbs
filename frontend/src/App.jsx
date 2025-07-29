@@ -5,6 +5,8 @@ import Register from './pages/Register';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Profile from './pages/Profile';
+import ServiceList from './components/services/List';
+import BookingList from './components/bookings/List';
 
 function App() {
   return (
@@ -12,10 +14,11 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/services" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/service-list" element={<ServiceList />} />
+        <Route path="/booked-list" element={<BookingList />} />
       </Routes>
       <Footer />
     </BrowserRouter>

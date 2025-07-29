@@ -29,10 +29,10 @@ export default function Header() {
               </a>
               <ul className="dropdown-menu dropdown-menu-end">
                 <li>
-                  <Link className="dropdown-item text-dark" to="/services">Services</Link>
+                  <Link className="dropdown-item text-dark" to="/service-list">Manage Services</Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item text-dark" to="/bookings">Bookings</Link>
+                  <Link className="dropdown-item text-dark" to="/booked-list">Manage Bookings</Link>
                 </li>
               </ul>
             </li>
