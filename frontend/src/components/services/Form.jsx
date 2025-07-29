@@ -8,7 +8,7 @@ export default function ServiceForm() {
     name: '',
     price: '',
     description: '',
-    status: 'active',
+    status: '',
   });
 
   const [loading, setLoading] = useState(true);
@@ -26,7 +26,7 @@ export default function ServiceForm() {
             name: data.name ?? '',
             price: data.price != null ? String(data.price) : '',
             description: data.description ?? '',
-            status: data.status ?? 'active',
+            status: data.status ?? '',
           });
         })
         .catch((err) => {

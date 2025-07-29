@@ -71,6 +71,7 @@ export default function Profile() {
                 <th>#</th>
                 <th>Service Name</th>
                 <th>Booking Date</th>
+                <th>Price</th>
                 <th>Status</th>
               </tr>
             </thead>
@@ -80,6 +81,7 @@ export default function Profile() {
                   <td>{index + 1}</td>
                   <td>{booking.service.name}</td>
                   <td>{formatDateTime(booking.booking_date)}</td>
+                  <td>${booking.service.price}</td>
                   <td>{booking.status}</td>
                 </tr>
               ))}

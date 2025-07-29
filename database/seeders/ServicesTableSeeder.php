@@ -13,7 +13,7 @@ class ServicesTableSeeder extends Seeder
             [
                 'name'              => 'Website development',
                 'description'       => 'Website description',
-                'price'             => '3000',
+                'price'             => '3000.99',
                 'status'            => 1,
             ],
             [
@@ -31,7 +31,7 @@ class ServicesTableSeeder extends Seeder
             [
                 'name'              => 'Custom ERP development',
                 'description'       => 'Custom ERP development description',
-                'price'             => '10000',
+                'price'             => '9999.99',
                 'status'            => 1,
             ],
             [
