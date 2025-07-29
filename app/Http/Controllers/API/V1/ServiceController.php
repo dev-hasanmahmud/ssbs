@@ -46,6 +46,22 @@ class ServiceController extends Controller
     }
 
     /**
+     * Admin: show a service
+     *
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function show(int $id): JsonResponse
+    {
+        $service = Service::findOrFail($id);
+
+        return $this->success(
+            new ServiceResource($service),
+            'Service retrieved'
+        );
+    }
+
+    /**
      * Admin: Update an existing service
      *
      * @param ServiceRequest $request

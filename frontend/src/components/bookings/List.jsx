@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import API from '../../api/axios';
 import endpoints from '../../api/endpoints';
 
@@ -14,12 +15,13 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="container mt-4">
-      <div className="text-center mb-4">
-        <h2>All Bookings</h2>
-        <p className="text-muted">View your scheduled service bookings</p>
+    <div className="container mt-2">
+      <div className="row">
+        <div className="col-12">
+          <h6>All Bookings</h6>
+          <p className="text-muted">Admin Panel / Bookings / List</p>
+        </div>
       </div>
-
       <div className="table-responsive">
         <table className="table table-bordered table-striped align-middle">
           <thead className="table-light">

@@ -24,6 +24,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Routes for Admin only
     Route::middleware('admin')->group(function () {
         Route::post('/services', [ServiceController::class, 'store']);
+        Route::get('/services/{id}', [ServiceController::class, 'show']);
         Route::put('/services/{id}', [ServiceController::class, 'update']);
         Route::delete('/services/{id}', [ServiceController::class, 'destroy']);
         Route::get('/admin/bookings', [AdminBookingController::class, 'index']);

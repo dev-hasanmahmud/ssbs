@@ -6,6 +6,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Profile from './pages/Profile';
 import ServiceList from './components/services/List';
+import ServiceForm from './components/services/Form';
 import BookingList from './components/bookings/List';
 
 function App() {
@@ -18,6 +19,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/service-list" element={<ServiceList />} />
+        <Route path="/services/create" element={<ServiceForm />} />
+        <Route path="/services/:id/edit" element={<ServiceForm isEdit />} />
         <Route path="/booked-list" element={<BookingList />} />
       </Routes>
       <Footer />

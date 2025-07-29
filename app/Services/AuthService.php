@@ -18,7 +18,8 @@ class AuthService
 
     public function profile()
     {
-        return $this->success(Auth::user(), 'Profile retrieved');
+        $data = User::with('bookings.service')->where('id', Auth::user()->id)->first();
+        return $this->success($data, 'Profile retrieved');
     }
 
     public function logout(): JsonResponse
