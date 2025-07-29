@@ -6,14 +6,20 @@ export default function ServiceCard({ service }) {
   const [bookingDate, setBookingDate] = useState('');
 
   const book = async () => {
+    if (!bookingDate) {
+      alert('Please select a booking date.');
+      return;
+    }
+
     try {
       await API.post(endpoints.bookings, {
         service_id: service.id,
         booking_date: bookingDate,
       });
-      alert('Service Booked.');
-    } catch {
-      alert('Something went wrong.');
+      alert('Service booked successfully.');
+      setBookingDate('');
+    } catch (error) {
+      console.error("Booking error:", error);
     }
   };
 

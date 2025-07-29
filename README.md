@@ -64,11 +64,13 @@ http://localhost:5173/
 API Endpoints	                   					   Method	Access
 - http://localhost:8000/api/register					POST	Public
 - http://localhost:8000/api/login						POST	Public
+- http://localhost:8000/api/services					GET		Customer
+
 - http://localhost:8000/api/profile						GET		Customer
 - http://localhost:8000/api/logout						POST	Customer
-- http://localhost:8000/api/services					GET		Customer
 - http://localhost:8000/api/bookings					POST	Customer
 - http://localhost:8000/api/bookings					GET		Customer
+
 - http://localhost:8000/api/services					POST	Admin only
 - http://localhost:8000/api/services/{id}				PUT		Admin only
 - http://localhost:8000/api/services/{id}				DELETE	Admin only

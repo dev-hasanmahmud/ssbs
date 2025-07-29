@@ -3,35 +3,77 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\ServiceRequest;
+use App\Http\Resources\ServiceResource;
 use App\Models\Service;
+use App\Traits\ApiResponse;
+use Illuminate\Http\JsonResponse;
 
 class ServiceController extends Controller
 {
-    public function index()
+    use ApiResponse;
+
+    /**
+     * Customer + Admin: Get all active services
+     *
+     * @return JsonResponse
+     */
+    public function index(): JsonResponse
     {
-        return Service::where('status', 'active')->get();
+        $services = Service::where('status', 'active')->get();
+
+        return $this->success(
+            ServiceResource::collection($services),
+            'Services fetched successfully'
+        );
     }
 
-    public function store(ServiceRequest $request)
+    /**
+     * Admin: Create a new service
+     *
+     * @param ServiceRequest $request
+     * @return JsonResponse
+     */
+    public function store(ServiceRequest $request): JsonResponse
     {
         $service = Service::create($request->validated());
-        
-        return response()->json($service, 201);
+
+        return $this->success(
+            new ServiceResource($service),
+            'Service created successfully',
+            201
+        );
     }
 
-    public function update(ServiceRequest $request, $id)
+    /**
+     * Admin: Update an existing service
+     *
+     * @param ServiceRequest $request
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function update(ServiceRequest $request, int $id): JsonResponse
     {
         $service = Service::findOrFail($id);
         $service->update($request->validated());
 
-        return response()->json($service);
+        return $this->success(
+            new ServiceResource($service),
+            'Service updated successfully'
+        );
     }
 
-    public function destroy($id)
+    /**
+     * Admin: Delete a service
+     *
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function destroy(int $id): JsonResponse
     {
-        return Service::destroy($id);
+        $service = Service::findOrFail($id);
+        $service->delete();
+
+        return $this->success(null, 'Service deleted successfully');
     }
 }
-

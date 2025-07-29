@@ -1,0 +1,1189 @@
+{
+	"info": {
+		"_postman_id": "317e70f9-4c22-4b10-ab4d-9ab9833b0fef",
+		"name": "SSBS API",
+		"description": "A simple API-based **Simple Service Booking System** built with Laravel 12 using Sanctum for authentication and React 19 for UI development.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47123384",
+		"_collection_link": "https://sajibov477-1818090.postman.co/workspace/sajibov477's-Workspace~cf4f6a78-6274-4f89-8aab-2046e5f1dc2e/collection/47123384-317e70f9-4c22-4b10-ab4d-9ab9833b0fef?action=share&source=collection_link&creator=47123384"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john2@example.com\",\n  \"password\": \"password123\",\n  \"password_confirmation\": \"password123\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/register",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john2@example.com\",\n  \"password\": \"password123\",\n  \"password_confirmation\": \"password123\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/api/register",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 29 Jul 2025 11:01:10 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"User registered successfully\",\n    \"data\": {\n        \"token\": \"2|hHj1YL0vpLNADQtHnOVnfI3gfSGneeO6PJDT2ojjb3a919ed\",\n        \"user\": {\n            \"id\": 4,\n            \"name\": \"John Doe\",\n            \"email\": \"john2@example.com\",\n            \"is_admin\": false,\n            \"created_at\": \"2025-07-29T11:01:09.000000Z\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"admin@test.com\",\n  \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/login",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"admin@test.com\",\n  \"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/api/login",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 29 Jul 2025 11:11:45 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Login successful\",\n    \"data\": {\n        \"token\": \"6|eiWz8e70IbFxW3AIvvi9dtslEj1GjtFrD7VW6j3J7ed1498f\",\n        \"user\": {\n            \"id\": 1,\n            \"name\": \"Admin\",\n            \"email\": \"admin@test.com\",\n            \"is_admin\": true,\n            \"created_at\": \"2025-06-02T21:46:10.000000Z\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/profile",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Profile",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{domain}}/api/profile",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 29 Jul 2025 11:33:16 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Profile retrieved\",\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Admin\",\n        \"email\": \"admin@test.com\",\n        \"email_verified_at\": \"2025-06-02T21:46:10.000000Z\",\n        \"created_at\": \"2025-06-02T21:46:10.000000Z\",\n        \"updated_at\": \"2025-06-02T21:46:10.000000Z\",\n        \"is_admin\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/logout",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Logout",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{domain}}/api/logout",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 29 Jul 2025 11:34:21 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Logged out successfully\",\n    \"data\": null\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Services",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/services",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"services"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{domain}}/api/services",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"services"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 29 Jul 2025 11:03:04 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Services fetched successfully\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Website development\",\n            \"description\": \"Website description\",\n            \"price\": \"3000.00\",\n            \"status\": \"active\",\n            \"created_at\": null\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Ecommerce development\",\n            \"description\": \"Ecommerce development description\",\n            \"price\": \"4000.00\",\n            \"status\": \"active\",\n            \"created_at\": null\n        },\n        {\n            \"id\": 3,\n            \"name\": \"ERP development\",\n            \"description\": \"ERP development description\",\n            \"price\": \"6000.00\",\n            \"status\": \"active\",\n            \"created_at\": null\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Custom ERP development\",\n            \"description\": \"Custom ERP development description\",\n            \"price\": \"10000.00\",\n            \"status\": \"active\",\n            \"created_at\": null\n        },\n        {\n            \"id\": 5,\n            \"name\": \"IOT product development\",\n            \"description\": \"IOT product development description\",\n            \"price\": \"5000.00\",\n            \"status\": \"active\",\n            \"created_at\": null\n        },\n        {\n            \"id\": 6,\n            \"name\": \"SQA and documentation\",\n            \"description\": \"SQA and documentation description\",\n            \"price\": \"1500.00\",\n            \"status\": \"active\",\n            \"created_at\": null\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Save (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Website\",\n  \"description\": \"Website description\",\n  \"price\": \"100\",\n  \"status\": \"active\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/services",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"services"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Save (Admin)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Website\",\n  \"description\": \"Website description\",\n  \"price\": \"100\",\n  \"status\": \"active\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/api/services",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"services"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 29 Jul 2025 11:12:35 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Service created successfully\",\n    \"data\": {\n        \"id\": 7,\n        \"name\": \"Website\",\n        \"description\": \"Website description\",\n        \"price\": \"100\",\n        \"status\": \"active\",\n        \"created_at\": \"2025-07-29T11:12:35.000000Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Website update\",\n  \"description\": \"Website description update\",\n  \"price\": \"150\",\n  \"status\": \"inactive\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/services/7",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"services",
+								"7"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update (Admin)",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Website update\",\n  \"description\": \"Website description update\",\n  \"price\": \"150\",\n  \"status\": \"inactive\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/api/services/7",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"services",
+										"7"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 29 Jul 2025 11:14:59 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Service updated successfully\",\n    \"data\": {\n        \"id\": 7,\n        \"name\": \"Website update\",\n        \"description\": \"Website description update\",\n        \"price\": \"150\",\n        \"status\": \"inactive\",\n        \"created_at\": \"2025-07-29T11:12:35.000000Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/services/7",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"services",
+								"7"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete (Admin)",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{domain}}/api/services/7",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"services",
+										"7"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 29 Jul 2025 11:17:12 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Service deleted successfully\",\n    \"data\": null\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Bookings",
+			"item": [
+				{
+					"name": "List (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/admin/bookings",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"bookings"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List (Admin)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{domain}}/api/admin/bookings",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"bookings"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 29 Jul 2025 11:22:09 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"All bookings fetched\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"service\": {\n                \"id\": 1,\n                \"name\": \"Website development\",\n                \"description\": \"Website description\",\n                \"price\": \"3000.00\",\n                \"status\": \"active\",\n                \"created_at\": null\n            },\n            \"booking_date\": \"2025-07-29\",\n            \"status\": \"pending\",\n            \"created_at\": \"2025-07-29T17:19:39.000000Z\",\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Admin\",\n                \"email\": \"admin@test.com\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/bookings",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"bookings"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{domain}}/api/bookings",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"bookings"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 29 Jul 2025 11:20:24 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Your bookings fetched successfully\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"booking_date\": \"2025-07-29\",\n            \"status\": \"pending\",\n            \"created_at\": \"2025-07-29T17:19:39.000000Z\",\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Admin\",\n                \"email\": \"admin@test.com\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Save",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"service_id\": 1,\n  \"booking_date\": \"2025-07-30T11:12:35.000000Z\",\n  \"user_id\": 1,\n  \"status\": \"pending\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/bookings",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"bookings"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Save",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"service_id\": 1,\n  \"booking_date\": \"2025-07-30T11:12:35.000000Z\",\n  \"user_id\": 1,\n  \"status\": \"pending\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/api/bookings",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"bookings"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 29 Jul 2025 11:50:16 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Service booked successfully\",\n    \"data\": {\n        \"id\": 3,\n        \"booking_date\": \"2025-07-30T00:00:00.000000Z\",\n        \"status\": \"pending\",\n        \"created_at\": \"2025-07-29T11:50:16.000000Z\",\n        \"user\": {\n            \"id\": 1,\n            \"name\": \"Admin\",\n            \"email\": \"admin@test.com\"\n        }\n    }\n}"
+						},
+						{
+							"name": "Check already booked for date",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"service_id\": 1,\n  \"booking_date\": \"2025-07-29T11:12:35.000000Z\",\n  \"user_id\": 1,\n  \"status\": \"pending\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/api/bookings",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"bookings"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 29 Jul 2025 11:48:09 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"You have already booked this service on the selected date.\"\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

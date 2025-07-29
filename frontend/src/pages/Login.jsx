@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import { useState } from 'react';
 import API from '../api/axios';
 import endpoints from '../api/endpoints';
@@ -14,10 +13,13 @@ export default function Login() {
     e.preventDefault();
     try {
       const res = await API.post(endpoints.login, form);
-      login(res.data.user, res.data.token);
+      const token = res.data.data.token;
+      const user = res.data.data.user;
+
+      login(user, token);
       navigate('/');
-    } catch {
-      alert('Login failed');
+    } catch (error) {
+      console.error("Login error:", error);
     }
   };
 

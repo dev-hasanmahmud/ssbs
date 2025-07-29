@@ -3,13 +3,27 @@
 namespace App\Http\Controllers\API\V1\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Resources\BookingResource;
 use App\Models\Booking;
+use App\Traits\ApiResponse;
+use Illuminate\Http\JsonResponse;
 
 class AdminBookingController extends Controller
 {
-    public function index()
+    use ApiResponse;
+
+    /**
+     * Display a listing of all bookings (admin only).
+     *
+     * @return JsonResponse
+     */
+    public function index(): JsonResponse
     {
-        return Booking::with(['user', 'service'])->get();
+        $bookings = Booking::with(['user', 'service'])->latest()->get();
+
+        return $this->success(
+            BookingResource::collection($bookings),
+            'All bookings fetched'
+        );
     }
 }

@@ -1,27 +1,15 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 export default function Header() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userName, setUserName] = useState('');
-  const [isAdmin, setIsAdmin] = useState(false);
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    const user = JSON.parse(localStorage.getItem('auth_user'));
-
-    if (token && user) {
-      setIsLoggedIn(true);
-      setUserName(user.name);
-      setIsAdmin(user.is_admin === 1);
-    }
-  }, []);
+  const isLoggedIn = !!user;
+  const isAdmin = user?.is_admin === 1;
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('auth_user');
-    setIsLoggedIn(false);
+    logout();
     navigate('/login');
   };
 
@@ -35,24 +23,19 @@ export default function Header() {
             <Link className="nav-link text-dark" to="/">Home</Link>
           </li>
           {isLoggedIn && isAdmin && (
-          <li className="nav-item dropdown">
-            <a
-              className="nav-link text-dark dropdown-toggle"
-              href="#"
-              role="button"
-              data-bs-toggle="dropdown"
-            >
-              Admin Panel
-            </a>
-            <ul className="dropdown-menu dropdown-menu-end">
-              <li>
-                <Link className="dropdown-item text-dark" to="/services">Services</Link>
-              </li>
-              <li>
-                <Link className="dropdown-item text-dark" to="/bookings">Bookings</Link>
-              </li>
-            </ul>
-          </li>
+            <li className="nav-item dropdown">
+              <a className="nav-link text-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                Admin Panel
+              </a>
+              <ul className="dropdown-menu dropdown-menu-end">
+                <li>
+                  <Link className="dropdown-item text-dark" to="/services">Services</Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item text-dark" to="/bookings">Bookings</Link>
+                </li>
+              </ul>
+            </li>
           )}
         </ul>
 
@@ -68,13 +51,8 @@ export default function Header() {
             </>
           ) : (
             <li className="nav-item dropdown">
-              <a
-                className="nav-link text-dark dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-              >
-                {userName}
+              <a className="nav-link text-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                {user.name}
               </a>
               <ul className="dropdown-menu dropdown-menu-end">
                 <li>

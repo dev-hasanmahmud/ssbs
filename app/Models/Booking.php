@@ -11,6 +11,10 @@ class Booking extends Model
 
     protected $fillable = ['user_id', 'service_id', 'booking_date', 'status'];
 
+    protected $casts = [
+        'booking_date' => 'date',
+    ];
+
     public function user() {
         return $this->belongsTo(User::class);
     }

@@ -3,17 +3,35 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\{
-    RegisterRequest,
-    LoginRequest,
+    LoginRequest, 
+    RegisterRequest
 };
+use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Services\AuthService;
+use App\Traits\ApiResponse;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\JsonResponse;
 
 class AuthController extends Controller
 {
-    public function register(RegisterRequest $request)
+    use ApiResponse;
+
+    protected $authService;
+
+    public function __construct(AuthService $authService)
+    {
+        $this->authService = $authService;
+    }
+
+    /**
+     * Register a new user
+     *
+     * @param RegisterRequest $request
+     * @return JsonResponse
+     */
+    public function register(RegisterRequest $request): JsonResponse
     {
         $user = User::create([
             'name'     => $request->name,
@@ -21,41 +39,53 @@ class AuthController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        $token = $user->createToken('api_token')->plainTextToken;
+        $token = $this->authService->createToken($user);
 
-        return response()->json([
+        return $this->success([
             'token' => $token,
-            'user'  => $user,
-            'message' => 'Registered successfully.',
-        ]);
+            'user'  => new UserResource($user),
+        ], 'User registered successfully', 201);
     }
 
-    public function login(LoginRequest $request)
+    /**
+     * Login user and return token
+     *
+     * @param LoginRequest $request
+     * @return JsonResponse
+     */
+    public function login(LoginRequest $request): JsonResponse
     {
         $user = User::where('email', $request->email)->first();
 
         if (! $user || ! Hash::check($request->password, $user->password)) {
-            return response()->json(['error' => 'Invalid credentials'], 401);
+            return $this->error('Invalid credentials', 401);
         }
 
-        $token = $user->createToken('api_token')->plainTextToken;
+        $token = $this->authService->createToken($user);
 
-        return response()->json([
+        return $this->success([
             'token' => $token,
-            'user'  => $user,
-            'message' => 'Logged in successfully.',
-        ]);
+            'user'  => new UserResource($user),
+        ], 'Login successful');
     }
 
-    public function logout(Request $request)
+    /**
+     * Get authenticated user profile
+     *
+     * @return JsonResponse
+     */
+    public function profile(): JsonResponse
     {
-        $request->user()->currentAccessToken()->delete();
-
-        return response()->json(['message' => 'Logout successfully.']);
+        return $this->authService->profile();
     }
 
-    public function profile(Request $request)
+    /**
+     * Logout user
+     *
+     * @return JsonResponse
+     */
+    public function logout(): JsonResponse
     {
-        return response()->json($request->user());
+        return $this->authService->logout();
     }
 }

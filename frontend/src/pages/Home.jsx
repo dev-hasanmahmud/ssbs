@@ -8,7 +8,9 @@ export default function Home() {
 
   useEffect(() => {
     API.get(endpoints.services)
-      .then((res) => setServices(res.data))
+      .then((res) => {
+        setServices(res.data.data);
+      })
       .catch((err) => console.error(err));
   }, []);
 

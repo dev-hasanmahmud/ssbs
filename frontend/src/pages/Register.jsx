@@ -13,10 +13,13 @@ export default function Register() {
     e.preventDefault();
     try {
       const res = await API.post(endpoints.register, form);
-      login(res.data.user, res.data.token);
+      const { user, token } = res.data.data;
+
+      login(user, token);
       navigate('/');
     } catch (err) {
       alert('Registration failed. Please check your inputs.');
+      console.error("Registration error:", error);
     }
   };
 
