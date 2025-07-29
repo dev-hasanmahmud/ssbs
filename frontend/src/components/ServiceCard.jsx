@@ -12,14 +12,25 @@ export default function ServiceCard({ service }) {
     }
 
     try {
-      await API.post(endpoints.bookings, {
+      const response = await API.post(endpoints.bookings, {
         service_id: service.id,
         booking_date: bookingDate,
       });
-      alert('Service booked successfully.');
-      setBookingDate('');
+
+      if (response.data.success) {
+        alert('Service booked successfully.');
+        setBookingDate('');
+      } else {
+        alert(response.data.message || 'Booking failed.');
+      }
     } catch (error) {
       console.error("Booking error:", error);
+
+      if (error.response && error.response.data && error.response.data.message) {
+        alert(error.response.data.message);
+      } else {
+        alert('An unexpected error occurred while booking.');
+      }
     }
   };
 

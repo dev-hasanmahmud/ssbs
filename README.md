@@ -72,6 +72,7 @@ API Endpoints	                   					   Method	Access
 - http://localhost:8000/api/bookings					GET		Customer
 
 - http://localhost:8000/api/services					POST	Admin only
+- http://localhost:8000/api/services/{id}				GET		Admin only
 - http://localhost:8000/api/services/{id}				PUT		Admin only
 - http://localhost:8000/api/services/{id}				DELETE	Admin only
 - http://localhost:8000/api/admin/bookings				GET		Admin only
