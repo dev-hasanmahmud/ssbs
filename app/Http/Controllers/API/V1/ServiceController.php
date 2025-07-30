@@ -20,13 +20,7 @@ class ServiceController extends Controller
      */
     public function index(): JsonResponse
     {
-        $query = Service::query();
-
-        if (auth()->user()?->is_admin != 1) {
-            $query->where('status', 'active');
-        }
-
-        $services = $query->get();
+        $services = Service::get();
 
         return $this->success(
             ServiceResource::collection($services),

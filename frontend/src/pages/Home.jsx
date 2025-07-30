@@ -9,7 +9,8 @@ export default function Home() {
   useEffect(() => {
     API.get(endpoints.services)
       .then((res) => {
-        setServices(res.data.data);
+        const activeServices = res.data.data.filter(service => service.status === 'active');
+        setServices(activeServices);
       })
       .catch((err) => console.error(err));
   }, []);
