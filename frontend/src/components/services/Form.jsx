@@ -20,7 +20,7 @@ export default function ServiceForm() {
     if (isEdit) {
       API.get(endpoints.getService(id))
         .then((res) => {
-          const data = res.data;
+          const data = res.data.data;
 
           setForm({
             name: data.name ?? '',

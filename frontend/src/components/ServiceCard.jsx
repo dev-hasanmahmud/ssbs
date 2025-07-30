@@ -46,7 +46,7 @@ export default function ServiceCard({ service }) {
           type="date"
           className="form-control my-2"
           value={bookingDate}
-          required
+          min={new Date().toISOString().split('T')[0]}
           onChange={(e) => setBookingDate(e.target.value)}
         />
         <button onClick={book} className="btn btn-lg btn-outline-primary mt-auto">
