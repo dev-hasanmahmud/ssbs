@@ -7,11 +7,14 @@ use App\Http\Requests\ServiceRequest;
 use App\Http\Resources\ServiceResource;
 use App\Models\Service;
 use App\Traits\ApiResponse;
+use App\Services\OurService;
 use Illuminate\Http\JsonResponse;
 
 class ServiceController extends Controller
 {
     use ApiResponse;
+
+    public function __construct(protected OurService $srv) {}
 
     /**
      * Customer + Admin: Get all active services
@@ -20,7 +23,7 @@ class ServiceController extends Controller
      */
     public function index(): JsonResponse
     {
-        $services = Service::get();
+        $services = $this->srv->all();
 
         return $this->success(
             ServiceResource::collection($services),
@@ -36,7 +39,7 @@ class ServiceController extends Controller
      */
     public function store(ServiceRequest $request): JsonResponse
     {
-        $service = Service::create($request->validated());
+        $service = $this->srv->store($request->validated());
 
         return $this->success(
             new ServiceResource($service),
@@ -53,7 +56,7 @@ class ServiceController extends Controller
      */
     public function show(int $id): JsonResponse
     {
-        $service = Service::findOrFail($id);
+        $service = $this->srv->find($id);
 
         return $this->success(
             new ServiceResource($service),
@@ -70,8 +73,7 @@ class ServiceController extends Controller
      */
     public function update(ServiceRequest $request, int $id): JsonResponse
     {
-        $service = Service::findOrFail($id);
-        $service->update($request->validated());
+        $service = $this->srv->update($id, $request->validated());
 
         return $this->success(
             new ServiceResource($service),
@@ -87,8 +89,7 @@ class ServiceController extends Controller
      */
     public function destroy(int $id): JsonResponse
     {
-        $service = Service::findOrFail($id);
-        $service->delete();
+        $this->srv->delete($id);
 
         return $this->success(null, 'Service deleted successfully');
     }

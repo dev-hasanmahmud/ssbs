@@ -10,7 +10,18 @@ A simple API-based **Simple Service Booking System** built with Laravel 12 using
 - Book Services (Customers)
 - View Bookings (Customer & Admin)
 - Validation using FormRequest
-- Clean code with Repository Pattern
+- Clean code with Repository-Service Pattern with good use of interfaces, abstraction, and separation of logic.
+```Flow
+[HTTP Request]
+     ↓
+[Controller]
+     ↓
+[Service Layer]
+     ↓
+[Repository Interface → Repository Implementation]
+     ↓
+[Model → Database]
+```
 - RESTful APIs
 
 ---
