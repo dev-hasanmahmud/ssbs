@@ -5,12 +5,18 @@ namespace App\Http\Controllers\API\V1\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BookingResource;
 use App\Models\Booking;
-use App\Traits\ApiResponse;
+use App\Services\BookingService;
+use App\Traits\{
+    ApiResponse,
+    HandleAPIException
+};
 use Illuminate\Http\JsonResponse;
 
 class AdminBookingController extends Controller
 {
-    use ApiResponse;
+    use ApiResponse, HandleAPIException;
+
+    public function __construct(protected BookingService $srv) {}
 
     /**
      * Display a listing of all bookings (admin only).
@@ -19,11 +25,13 @@ class AdminBookingController extends Controller
      */
     public function index(): JsonResponse
     {
-        $bookings = Booking::with(['user', 'service'])->latest()->get();
+        return $this->handleExceptions(function () {
+            $bookings = $this->srv->allForAdmin();
 
-        return $this->success(
-            BookingResource::collection($bookings),
-            'All bookings fetched'
-        );
+            return $this->success(
+                BookingResource::collection($bookings),
+                'All bookings fetched'
+            );
+        });
     }
 }
