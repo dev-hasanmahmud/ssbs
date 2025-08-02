@@ -10,13 +10,16 @@ use App\Http\Requests\{
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Services\AuthService;
-use App\Traits\ApiResponse;
+use App\Traits\{
+    ApiResponse,
+    HandleAPIException
+};
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\JsonResponse;
 
 class AuthController extends Controller
 {
-    use ApiResponse;
+    use ApiResponse, HandleAPIException;
 
     protected $authService;
 
@@ -33,18 +36,14 @@ class AuthController extends Controller
      */
     public function register(RegisterRequest $request): JsonResponse
     {
-        $user = User::create([
-            'name'     => $request->name,
-            'email'    => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
+        return $this->handleExceptions(function () use ($request) {
+            $result = $this->authService->register($request->validated());
 
-        $token = $this->authService->createToken($user);
-
-        return $this->success([
-            'token' => $token,
-            'user'  => new UserResource($user),
-        ], 'User registered successfully', 201);
+            return $this->success([
+                'token' => $result['token'],
+                'user'  => new UserResource($result['user']),
+            ], 'User registered successfully', 201);
+        });
     }
 
     /**
@@ -55,18 +54,14 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request): JsonResponse
     {
-        $user = User::where('email', $request->email)->first();
+        return $this->handleExceptions(function () use ($request) {
+            $result = $this->authService->login($request->email, $request->password);
 
-        if (! $user || ! Hash::check($request->password, $user->password)) {
-            return $this->error('Invalid credentials', 401);
-        }
-
-        $token = $this->authService->createToken($user);
-
-        return $this->success([
-            'token' => $token,
-            'user'  => new UserResource($user),
-        ], 'Login successful');
+            return $this->success([
+                'token' => $result['token'],
+                'user'  => new UserResource($result['user']),
+            ], 'Login successful');
+        });
     }
 
     /**
@@ -76,7 +71,14 @@ class AuthController extends Controller
      */
     public function profile(): JsonResponse
     {
-        return $this->authService->profile();
+        return $this->handleExceptions(function () {
+            $user = $this->authService->authUser();
+
+            return $this->success(
+                new UserResource($user),
+                'User profile retrieved successfully'
+            );
+        });
     }
 
     /**
@@ -86,6 +88,10 @@ class AuthController extends Controller
      */
     public function logout(): JsonResponse
     {
-        return $this->authService->logout();
+        return $this->handleExceptions(function () {
+            $this->authService->logout();
+
+            return $this->success(null, 'Logged out successfully');
+        });
     }
 }

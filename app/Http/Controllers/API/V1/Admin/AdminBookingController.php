@@ -6,12 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\BookingResource;
 use App\Models\Booking;
 use App\Services\BookingService;
-use App\Traits\ApiResponse;
+use App\Traits\{
+    ApiResponse,
+    HandleAPIException
+};
 use Illuminate\Http\JsonResponse;
 
 class AdminBookingController extends Controller
 {
-    use ApiResponse;
+    use ApiResponse, HandleAPIException;
 
     public function __construct(protected BookingService $srv) {}
 
@@ -22,11 +25,13 @@ class AdminBookingController extends Controller
      */
     public function index(): JsonResponse
     {
-        $bookings = $this->srv->allForAdmin();
+        return $this->handleExceptions(function () {
+            $bookings = $this->srv->allForAdmin();
 
-        return $this->success(
-            BookingResource::collection($bookings),
-            'All bookings fetched'
-        );
+            return $this->success(
+                BookingResource::collection($bookings),
+                'All bookings fetched'
+            );
+        });
     }
 }

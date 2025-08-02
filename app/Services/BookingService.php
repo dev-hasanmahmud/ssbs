@@ -28,6 +28,10 @@ class BookingService
 
     public function store(array $data)
     {
+        if (empty($data)) {
+            throw new \Exception('Data cannot be empty', 400);
+        }
+        
         $data['booking_date'] = Carbon::parse($data['booking_date'])->format('Y-m-d');
         $data['user_id'] = auth()->id();
         $data['status'] = 'pending';

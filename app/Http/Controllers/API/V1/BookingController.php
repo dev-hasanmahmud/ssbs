@@ -6,12 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\BookingRequest;
 use App\Http\Resources\BookingResource;
 use App\Services\BookingService;
-use App\Traits\ApiResponse;
+use App\Traits\{
+    ApiResponse,
+    HandleAPIException
+};
 use Illuminate\Http\JsonResponse;
 
 class BookingController extends Controller
 {
-    use ApiResponse;
+    use ApiResponse, HandleAPIException;
 
     public function __construct(protected BookingService $srv) {}
 
@@ -23,13 +26,15 @@ class BookingController extends Controller
      */
     public function store(BookingRequest $request): JsonResponse
     {
-        $booking = $this->srv->store($request->validated());
+        return $this->handleExceptions(function () use ($request) {
+            $booking = $this->srv->store($request->validated());
 
-        return $this->success(
-            new BookingResource($booking),
-            'Service booked successfully',
-            201
-        );
+            return $this->success(
+                new BookingResource($booking),
+                'Service booked successfully',
+                201
+            );
+        });
     }
 
     /**
@@ -39,11 +44,13 @@ class BookingController extends Controller
      */
     public function index(): JsonResponse
     {
-        $bookings = $this->srv->allForUser();
+        return $this->handleExceptions(function () {
+            $bookings = $this->srv->allForUser();
 
-        return $this->success(
-            BookingResource::collection($bookings),
-            'Your bookings fetched successfully'
-        );
+            return $this->success(
+                BookingResource::collection($bookings),
+                'Your bookings fetched successfully'
+            );
+        });
     }
 }
