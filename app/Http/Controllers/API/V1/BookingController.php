@@ -5,14 +5,15 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BookingRequest;
 use App\Http\Resources\BookingResource;
-use Carbon\Carbon;
-use App\Models\Booking;
+use App\Services\BookingService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 
 class BookingController extends Controller
 {
     use ApiResponse;
+
+    public function __construct(protected BookingService $srv) {}
 
     /**
      * Customer: Book a service
@@ -22,22 +23,7 @@ class BookingController extends Controller
      */
     public function store(BookingRequest $request): JsonResponse
     {
-        $data = $request->validated();
-        $data['booking_date'] = Carbon::parse($data['booking_date'])->format('Y-m-d');
-        $data['user_id'] = auth()->id();
-        $data['status'] = 'pending';
-
-        // Prevent duplicate bookings
-        $alreadyBooked = Booking::where('user_id', $data['user_id'])
-            ->where('service_id', $data['service_id'])
-            ->whereDate('booking_date', $data['booking_date'])
-            ->exists();
-
-        if ($alreadyBooked) {
-            return $this->error('You have already booked this service on the selected date.', 409);
-        }
-
-        $booking = Booking::create($data);
+        $booking = $this->srv->store($request->validated());
 
         return $this->success(
             new BookingResource($booking),
@@ -53,7 +39,7 @@ class BookingController extends Controller
      */
     public function index(): JsonResponse
     {
-        $bookings = Booking::where('user_id', auth()->id())->latest()->get();
+        $bookings = $this->srv->allForUser();
 
         return $this->success(
             BookingResource::collection($bookings),
