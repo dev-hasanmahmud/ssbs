@@ -20,6 +20,9 @@ class UserResource extends JsonResource
             'email'      => $this->email,
             'is_admin'   => $this->is_admin,
             'created_at' => $this->created_at,
+            'bookings'   => BookingResource::collection(
+                $this->whenLoaded('bookings') ?? $this->bookings
+            ),
         ];
     }
 }

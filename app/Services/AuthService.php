@@ -20,7 +20,7 @@ class AuthService
             throw new \Exception('Unauthenticated', 401);
         }
 
-        return $user;
+        return User::with('bookings.service')->findOrFail($user->id);
     }
 
     public function createToken(User $user): string
